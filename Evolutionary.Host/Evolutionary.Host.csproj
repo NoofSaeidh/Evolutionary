@@ -21,7 +21,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Evolutionary.Core\Evolutionary.Core.csproj" />
-		<ProjectReference Include="..\Evolutionary.UI.Console\Evolutionary.UI.Console.csproj" />
 		<ProjectReference Include="..\Evolutionary.UI\Evolutionary.UI.csproj" />
 	</ItemGroup>
 

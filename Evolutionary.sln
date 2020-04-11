@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolutionary.Core", "Evolutionary.Core\Evolutionary.Core.csproj", "{D6D65050-B735-427A-8A5C-765AB710202A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolutionary.UI.Console", "Evolutionary.UI.Console\Evolutionary.UI.Console.csproj", "{5D72D44A-E1F0-48AF-A905-E99ED5A1DE6F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3250ED4C-31FE-46AC-A288-C393E7C6AE10}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -26,10 +24,6 @@ Global
 		{D6D65050-B735-427A-8A5C-765AB710202A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6D65050-B735-427A-8A5C-765AB710202A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6D65050-B735-427A-8A5C-765AB710202A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D72D44A-E1F0-48AF-A905-E99ED5A1DE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D72D44A-E1F0-48AF-A905-E99ED5A1DE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D72D44A-E1F0-48AF-A905-E99ED5A1DE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D72D44A-E1F0-48AF-A905-E99ED5A1DE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7755E1C7-4382-44DC-876F-34426E60A505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7755E1C7-4382-44DC-876F-34426E60A505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7755E1C7-4382-44DC-876F-34426E60A505}.Release|Any CPU.ActiveCfg = Release|Any CPU

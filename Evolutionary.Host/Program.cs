@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Autofac;
 using Evolutionary.Core;
-using Evolutionary.UI.Console;
+using Evolutionary.Core.UI;
+using Evolutionary.UI;
 
 namespace Evolutionary.Host
 {
@@ -14,6 +16,10 @@ namespace Evolutionary.Host
 
             builder.RegisterType<ConsoleCancellationSource>()
                    .As<ICancellationSource>()
+                   .SingleInstance();
+
+            builder.RegisterType<ConsoleRenderer>()
+                   .As<IRenderer>()
                    .SingleInstance();
 
             builder.RegisterType<Startup>()

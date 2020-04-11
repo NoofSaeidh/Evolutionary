@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Evolutionary.UI.Console
+namespace Evolutionary.Core.UI
 {
-    public class ConsoleRenderer : IRenderer
+    public interface IRenderer
     {
-        
+        Task RenderFrame(Frame frame);
     }
 }

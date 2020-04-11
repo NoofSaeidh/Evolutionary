@@ -1,4 +1,5 @@
 ﻿using Evolutionary.Core;
+using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Evolutionary.UI.Console
+namespace Evolutionary.UI
 {
     public class ConsoleCancellationSource : ICancellationSource, IDisposable
     {
