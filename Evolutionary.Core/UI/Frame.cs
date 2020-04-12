@@ -2,14 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace Evolutionary.Core.UI
 {
     public class Frame : IEnumerable<FrameCell>
     {
-        internal readonly FrameCell[,] _matrix;
+        private readonly FrameCell[,] _matrix;
 
         public Frame(int lengthHorizontal, int lengthVertical)
         {
@@ -18,13 +17,26 @@ namespace Evolutionary.Core.UI
             _matrix = new FrameCell[lengthHorizontal, lengthVertical];
         }
 
+        internal Frame(FrameCell[,] matrix)
+        {
+            _matrix = matrix;
+            LengthHorizontal = _matrix.GetLength(0);
+            LengthVertical = _matrix.GetLength(1);
+        }
+
         public FrameCell this[int x, int y]
         {
             get
             {
-                Assertion.AssertPosition(x, LengthHorizontal, nameof(x));
-                Assertion.AssertPosition(y, LengthVertical, nameof(y));
+                ThrowHelper.Check_ArgumentOutOfRange(x, LengthHorizontal, nameof(x));
+                ThrowHelper.Check_ArgumentOutOfRange(y, LengthVertical, nameof(y));
                 return _matrix[x, y];
+            }
+            internal set
+            {
+                ThrowHelper.Check_ArgumentOutOfRange(x, LengthHorizontal, nameof(x));
+                ThrowHelper.Check_ArgumentOutOfRange(y, LengthVertical, nameof(y));
+                _matrix[x, y] = value;
             }
         }
 
@@ -40,15 +52,5 @@ namespace Evolutionary.Core.UI
         {
             return _matrix.GetEnumerator();
         }
-    }
-
-    public class FrameCell
-    {
-        public FrameCell(Color color)
-        {
-            Color = color;
-        }
-
-        public Color Color { get; }
     }
 }
