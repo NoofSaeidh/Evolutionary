@@ -2,43 +2,34 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Characteristics
 {
-    public struct CharacteristicValue<T> : IEquatable<CharacteristicValue<T>>
+    public struct CharacteristicValue : IEquatable<CharacteristicValue>
     {
-        private readonly T _value;
-
-        public CharacteristicValue(T value, Characteristic characteristic)
+        public CharacteristicValue(int value, Characteristic characteristic)
         {
-            _value = value;
+            Value = value;
             Characteristic = characteristic;
         }
 
-        [NotNull]
-        public T Value
-        {
-            get
-            {
-                ThrowHelper.Check_StructNotInitalized(_value);
-                return _value!;
-            }
-        }
+        public int Value { get; }
         public Characteristic Characteristic { get; }
 
         public override bool Equals(object? obj)
         {
-            return obj is CharacteristicValue<T> ch
+            return obj is CharacteristicValue ch
                        && Equals(ch);
         }
 
-        public bool Equals(CharacteristicValue<T> other)
+        public bool Equals(CharacteristicValue other)
         {
             return Characteristic.Equals(other.Characteristic)
-                && EqualityComparer<T>.Default.Equals(Value, other.Value);
+                && Value.Equals(other.Value);
         }
 
         public override int GetHashCode()
@@ -48,15 +39,15 @@ namespace Evolutionary.Core.Characteristics
 
         public override string ToString()
         {
-            return Characteristic.ToString() + ": " + Value.ToString();
+            return Characteristic.ToString() + ": " + Value.ToString(CultureInfo.InvariantCulture.NumberFormat);
         }
 
-        public static bool operator ==(CharacteristicValue<T> left, CharacteristicValue<T> right)
+        public static bool operator ==(CharacteristicValue left, CharacteristicValue right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(CharacteristicValue<T> left, CharacteristicValue<T> right)
+        public static bool operator !=(CharacteristicValue left, CharacteristicValue right)
         {
             return !(left == right);
         }

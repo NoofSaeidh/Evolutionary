@@ -230,4 +230,4 @@ dotnet_diagnostic.CA1303.severity = silent
 dotnet_diagnostic.CA2007.severity = silent
 
 # CA1060: Move pinvokes to native methods class
-dotnet_diagnostic.CA1060.severity = silent
+dotnet_diagnostic.CA1060.severity = none

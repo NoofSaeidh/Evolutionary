@@ -9,16 +9,16 @@ namespace Evolutionary.Core.Mutations
 {
     public interface IMutable
     {
-        object Mutate(IMutator mutator);
+        Creature Mutate(IMutator mutator);
     }
 
-    public interface IMutable<T> : IMutable
+    public interface IMutable<out T> : IMutable where T : Creature
     {
         new T Mutate(IMutator mutator);
 
-        object IMutable.Mutate(IMutator mutator)
+        Creature IMutable.Mutate(IMutator mutator)
         {
-            return (object)Mutate(mutator)!;
+            return (Creature)Mutate(mutator)!;
         }
     }
 }

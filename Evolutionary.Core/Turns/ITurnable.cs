@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolutionary.Core.Entities
+namespace Evolutionary.Core.Turns
 {
-    public abstract class Entity
+    public interface ITurnable
     {
-        
+        void TakeTurn(Turn turn);
     }
 }

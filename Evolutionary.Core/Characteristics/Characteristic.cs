@@ -12,9 +12,10 @@ namespace Evolutionary.Core.Characteristics
     {
         private readonly string _name;
 
-        public Characteristic(string name)
+        public Characteristic(string name, bool mutable = false)
         {
             _name = name;
+            Mutable = mutable;
         }
 
         public string Name
@@ -25,6 +26,9 @@ namespace Evolutionary.Core.Characteristics
                 return _name;
             }
         }
+
+        public bool Mutable { get; }
+
         public override bool Equals(object? obj)
         {
             return obj is Characteristic ch
@@ -43,7 +47,7 @@ namespace Evolutionary.Core.Characteristics
 
         public override string ToString()
         {
-            return Name;
+            return $"{Name} (Mutable = {Mutable})";
         }
 
         public static bool operator ==(Characteristic left, Characteristic right)
