@@ -1,6 +1,8 @@
 ﻿using Evolutionary.Core.Characteristics;
+using Evolutionary.Core.Mapping;
 using Evolutionary.Core.Mutations;
 using Evolutionary.Core.Reproduction;
+using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Entities
 {
-    public abstract class Creature : Entity, IMutable, IReproducable
+    public abstract class Creature : Entity, IMutable, IReproducable, ITurnable
     {
+        public abstract string Description { get; }
         // properties must be in the same order for each instance
         protected abstract CharacteristicsList GetCharacteristics();
         protected abstract Creature CreateFromCharacteristics(CharacteristicsList chars);
@@ -56,11 +59,16 @@ namespace Evolutionary.Core.Entities
         public override string? ToString()
         {
             var sb = new StringBuilder();
+            sb.Append("[" + Description + "]");
             foreach (var ch in GetCharacteristics())
             {
-                sb.Append(ch.ToString() + "; ");
+                sb.Append(", " + ch.ToString());
             }
             return sb.ToString();
+        }
+
+        public virtual void TakeTurn(Round round, MapIndex currentPosition)
+        {
         }
     }
 

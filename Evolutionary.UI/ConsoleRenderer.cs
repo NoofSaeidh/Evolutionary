@@ -18,9 +18,9 @@ namespace Evolutionary.UI
             await Task.Yield();
             Console.BackgroundColor = Color.Black;
 
-            for (int x = 0; x < frame.LengthHorizontal; x++)
+            for (int x = 0; x < frame.Height; x++)
             {
-                for (int y = 0; y < frame.LengthVertical; y++)
+                for (int y = 0; y < frame.Width; y++)
                 {
                     Console.SetCursorPosition(x, y);
                     Console.Write("+", frame[x, y].Color);

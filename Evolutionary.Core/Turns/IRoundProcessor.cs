@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Entities;
+﻿using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Turns
 {
-    public interface ITurner
+    public interface IRoundProcessor
     {
-        void CalculateTurn(IReadOnlyList<ITurnable> turnables);
+        void ProcessRound(Round round);
     }
 }

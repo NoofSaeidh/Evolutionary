@@ -1,6 +1,8 @@
 ﻿using Evolutionary.Core.Characteristics;
 using Evolutionary.Core.Entities;
+using Evolutionary.Core.Mapping;
 using Evolutionary.Core.Mutations;
+using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,19 @@ namespace Evolutionary.Experiments.Experiment1
         {
             Speed = speed;
             Vision = vision;
-            MaxHealth = maxHealth;
+            Health = MaxHealth = maxHealth;
         }
 
+        public override string Description => nameof(Ex1Entity);
         public int Speed { get; }
         public int Vision { get; }
         public int MaxHealth { get; }
+        public int Health { get; private set; }
+
+        public override void TakeTurn(Round round, MapIndex currentPosition)
+        {
+            base.TakeTurn(round, currentPosition);
+        }
 
         protected override CharacteristicsList GetCharacteristics()
         {

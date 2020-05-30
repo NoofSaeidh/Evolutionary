@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using Autofac;
 using Evolutionary.Core;
+using Evolutionary.Core.Initialization;
 using Evolutionary.Core.UI;
+using Evolutionary.Experiments.Experiment1;
 using Evolutionary.UI;
 
 namespace Evolutionary.Host
@@ -13,21 +15,13 @@ namespace Evolutionary.Host
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
+            builder.RegisterModule<DefaultModule>();
 
-            builder.RegisterType<ConsoleCancellationSource>()
-                   .As<ICancellationSource>()
-                   .SingleInstance();
-
-            builder.RegisterType<ConsoleRenderer>()
-                   .As<IRenderer>()
-                   .SingleInstance();
-
-            builder.RegisterType<Startup>()
-                   .AsSelf();
+            builder.RegisterModule<Ex1Module>();
 
             using (var container = builder.Build())
             {
-                container.Resolve<Startup>().Start().GetAwaiter().GetResult();
+                container.Resolve<Application>().Start().GetAwaiter().GetResult();
             }
         }
     }

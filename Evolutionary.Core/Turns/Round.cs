@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Turns
 {
-    public interface ITurnable
+    public class Round
     {
-        void TakeTurn(Round round, MapIndex currentPosition);
+        public Round(Map map)
+        {
+            Map = map;
+        }
+
+        public Map Map { get; }
     }
 }
