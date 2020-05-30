@@ -26,7 +26,6 @@ namespace Evolutionary.UI
         public CancellationToken GetCancellationToken()
         {
             return _source.Token;
-
         }
 
         public void Dispose()

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Generations
@@ -21,9 +22,11 @@ namespace Evolutionary.Core.Generations
             for (int i = 0; i < generation.RoundsCount; i++)
             {
                 _roundProcessor.ProcessRound(new Round(generation.Map));
+                // todo: servic for await
+                Thread.Sleep(2000);
             }
 
-            return new Generation(generation.GenerationId + 1, generation.Map, generation.RoundsCount);
+            return new Generation(generation.GenerationId + 1, generation.RoundsCount, generation.Map);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Evolutionary.Core
             {
                 gen = _generationProcessor.ProcessGeneration(gen);
                 //Console.WriteLine("Slee");
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
                 if (_cancellationToken.IsCancellationRequested)
                     return;
 

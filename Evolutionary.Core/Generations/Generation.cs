@@ -9,15 +9,15 @@ namespace Evolutionary.Core.Generations
 {
     public class Generation
     {
-        public Generation(int generationId, Map map, int roundsCount)
+        public Generation(int generationId, int roundsCount, Map map)
         {
             GenerationId = generationId;
-            Map = map;
             RoundsCount = roundsCount;
+            Map = map;
         }
 
         public int GenerationId { get; }
-        public Map Map { get; }
         public int RoundsCount { get; }
+        public Map Map { get; }
     }
 }

@@ -12,12 +12,33 @@ namespace Evolutionary.Experiments.Experiment1
 {
     public class Ex1Initializer : IInitializer
     {
-        public Generation InitialGeneration => new Generation(0, new Map(new Field[,]
+        private Map CreateMap(MapIndex size, int creatureCount, int speed, int vision, int maxHealth)
         {
-            { default, default, default, new Field(new Ex1Entity(10, 10, 10)) },
-            { default, new Field(new Ex1Entity(10, 10, 10)), default, default},
-            { default, default, default, default},
-            { default, default, default, new Field(new Ex1Entity(10, 10, 10))},
-        }), 32);
+            var map = new Map(size);
+            var rand = new Random();
+            for (int i = 0; i < creatureCount; i++)
+            {
+                while(true)
+                {
+                    var x = rand.Next(0, size.X);
+                    var y = rand.Next(0, size.Y);
+                    if(map[x,y].IsEmpty)
+                    {
+                        map[x, y] = new Field(new Ex1Creature(10, 10, 100));
+                        break;
+                    }
+                }
+            }
+            return map;
+        }
+
+        public Generation InitialGeneration => new Generation(0, 32,
+            CreateMap(
+                size: (32, 32),
+                creatureCount: 16,
+                speed: 4,
+                vision: 4,
+                maxHealth: 200
+            ));
     }
 }

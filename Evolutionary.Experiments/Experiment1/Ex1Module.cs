@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Evolutionary.Core.Initialization;
+using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Evolutionary.Experiments.Experiment1
             base.Load(builder);
 
             builder.RegisterType<Ex1Initializer>().As<IInitializer>();
+
+            builder.RegisterDecorator<Ex1FieldMapper, IFieldMapper>();
         }
     }
 }

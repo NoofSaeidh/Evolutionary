@@ -1,4 +1,5 @@
-﻿using Evolutionary.Core.UI;
+﻿using Evolutionary.Core.Turns;
+using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,19 +14,30 @@ namespace Evolutionary.UI
 {
     public class ConsoleRenderer : IRenderer
     {
-        public async Task RenderFrame(Frame frame)
-        {
-            await Task.Yield();
-            Console.BackgroundColor = Color.Black;
+        private readonly IFieldMapper _fieldMapper;
 
-            for (int x = 0; x < frame.Height; x++)
+        public ConsoleRenderer(IFieldMapper fieldMapper)
+        {
+            _fieldMapper = fieldMapper;
+        }
+
+        public Task RenderRound(Round round)
+        {
+            //await Task.Yield();
+            Console.BackgroundColor = Color.Black;
+            Console.Clear();
+
+            for (int x = 0; x < round.Map.Size.X; x++)
             {
-                for (int y = 0; y < frame.Width; y++)
+                for (int y = 0; y < round.Map.Size.Y; y++)
                 {
                     Console.SetCursorPosition(x, y);
-                    Console.Write("+", frame[x, y].Color);
+                    var fieldView = _fieldMapper.MapField(round.Map[x, y]);
+                    Console.Write(fieldView.Sign, fieldView.Color);
                 }
             }
+
+            return Task.CompletedTask;
         }
     }
 }

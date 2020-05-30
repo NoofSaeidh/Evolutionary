@@ -19,14 +19,6 @@ namespace Evolutionary.Host
         {
             base.Load(builder);
 
-            builder.RegisterType<ConsoleCancellationSource>()
-                   .As<ICancellationSource>()
-                   .SingleInstance();
-
-            builder.RegisterType<ConsoleRenderer>()
-                   .As<IRenderer>()
-                   .SingleInstance();
-
             builder.RegisterType<Application>()
                    .AsSelf();
 

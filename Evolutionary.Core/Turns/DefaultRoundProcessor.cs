@@ -1,15 +1,25 @@
-﻿using Evolutionary.Core.UI;
+﻿using Evolutionary.Core.Mapping;
+using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Turns
 {
     public class DefaultRoundProcessor : IRoundProcessor
     {
-        public void ProcessRound(Round round)
+
+        public DefaultRoundProcessor(IRenderer renderer)
+        {
+            Renderer = renderer;
+        }
+
+        protected IRenderer Renderer { get; }
+        
+        public virtual void ProcessRound(Round round)
         {
             for (int x = 0; x < round.Map.Size.X; x++)
             {
@@ -22,6 +32,8 @@ namespace Evolutionary.Core.Turns
                     }
                 }
             }
+
+            Renderer.RenderRound(round);
         }
     }
 }

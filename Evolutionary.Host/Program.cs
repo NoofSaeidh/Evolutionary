@@ -16,7 +16,7 @@ namespace Evolutionary.Host
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<DefaultModule>();
-
+            builder.RegisterModule<ConsoleModule>();
             builder.RegisterModule<Ex1Module>();
 
             using (var container = builder.Build())

@@ -2,9 +2,9 @@
 
 namespace Evolutionary.Core.UI
 {
-    public class FrameCell
+    public class FieldView
     {
-        public FrameCell(Color color, char sign)
+        public FieldView(Color color, char sign)
         {
             Color = color;
             Sign = sign;
