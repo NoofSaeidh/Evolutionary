@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +9,15 @@ namespace Evolutionary.Core.Generations
 {
     public class Generation
     {
-        public Generation(int generationId, int roundsCount, Map map)
+        public Generation(int generationId, int roundsCount, Field field)
         {
             GenerationId = generationId;
             RoundsCount = roundsCount;
-            Map = map;
+            Field = field;
         }
 
         public int GenerationId { get; }
         public int RoundsCount { get; }
-        public Map Map { get; }
+        public Field Field { get; }
     }
 }

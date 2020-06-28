@@ -1,5 +1,4 @@
 ﻿using Evolutionary.Core.Global;
-using Evolutionary.Core.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

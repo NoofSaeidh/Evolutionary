@@ -17,7 +17,7 @@ namespace Evolutionary.Experiments.Experiment1
 
             builder.RegisterType<Ex1Initializer>().As<IInitializer>();
 
-            builder.RegisterDecorator<Ex1FieldMapper, IFieldMapper>();
+            builder.RegisterDecorator<Ex1FieldMapper, IFieldCellMapper>();
         }
     }
 }

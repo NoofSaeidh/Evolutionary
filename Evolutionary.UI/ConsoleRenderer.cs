@@ -15,9 +15,9 @@ namespace Evolutionary.UI
 {
     public class ConsoleRenderer : IRenderer, IStartable
     {
-        private readonly IFieldMapper _fieldMapper;
+        private readonly IFieldCellMapper _fieldMapper;
 
-        public ConsoleRenderer(IFieldMapper fieldMapper)
+        public ConsoleRenderer(IFieldCellMapper fieldMapper)
         {
             _fieldMapper = fieldMapper;
         }
@@ -34,13 +34,13 @@ namespace Evolutionary.UI
             Console.BackgroundColor = Color.Black;
             Console.Clear();
 
-            for (int x = 0; x < round.Map.Size.X; x++)
+            for (int x = 0; x < round.Field.Size.X; x++)
             {
-                for (int y = 0; y < round.Map.Size.Y; y++)
+                for (int y = 0; y < round.Field.Size.Y; y++)
                 {
                     Console.SetCursorPosition(x, y);
-                    var fieldView = _fieldMapper.MapField(round.Map[x, y]);
-                    Console.Write(fieldView.Sign, fieldView.Color);
+                    var cellView = _fieldMapper.MapCell(round.Field[(x, y)]);
+                    Console.Write(cellView.Sign, cellView.Color);
                 }
             }
 

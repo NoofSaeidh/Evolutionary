@@ -25,7 +25,7 @@ namespace Evolutionary.UI
                    .AutoActivate();
 
             builder.RegisterType<ConsoleFieldMapper>()
-                   .As<IFieldMapper>()
+                   .As<IFieldCellMapper>()
                    .SingleInstance();
         }
     }

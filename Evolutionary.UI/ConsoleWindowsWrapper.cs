@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.UI
 {
-    public class ConsoleWindowsWrapper
+    public static class ConsoleWindowsWrapper
     {
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetStdHandle(int handle);
@@ -21,7 +21,7 @@ namespace Evolutionary.UI
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct COORD
+        private struct COORD
         {
             public short X;
             public short Y;

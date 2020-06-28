@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.UI
 {
-    public interface IFieldMapper
+    // todo: map position?
+    public interface IFieldCellMapper
     {
-        FieldView MapField(Field field);
+        FieldCellView MapCell(FieldCell cell);
     }
 }

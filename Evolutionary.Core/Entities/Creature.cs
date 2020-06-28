@@ -1,5 +1,5 @@
 ﻿using Evolutionary.Core.Characteristics;
-using Evolutionary.Core.Mapping;
+using Evolutionary.Core.Fielding;
 using Evolutionary.Core.Mutations;
 using Evolutionary.Core.Reproduction;
 using Evolutionary.Core.Turns;

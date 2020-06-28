@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
 using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Experiments.Experiment1
 {
-    public class Ex1FieldMapper : IFieldMapper
+    public class Ex1FieldMapper : IFieldCellMapper
     {
-        private readonly IFieldMapper _base;
+        private readonly IFieldCellMapper _base;
 
-        public static readonly FieldView Healthy = new FieldView(Color.Green, '+');
-        public static readonly FieldView Hurt = new FieldView(Color.Orange, '+');
-        public static readonly FieldView Dying = new FieldView(Color.Red, '+');
+        public static readonly FieldCellView Healthy = new FieldCellView(Color.Green, '+');
+        public static readonly FieldCellView Hurt = new FieldCellView(Color.Orange, '+');
+        public static readonly FieldCellView Dying = new FieldCellView(Color.Red, '+');
 
-        public Ex1FieldMapper(IFieldMapper @base)
+        public Ex1FieldMapper(IFieldCellMapper @base)
         {
             _base = @base;
         }
 
-        public FieldView MapField(Field field)
+        public FieldCellView MapCell(FieldCell cell)
         {
-            if(field.Entity is Ex1Creature entity)
+            if(cell.Entity is Ex1Creature entity)
             {
                 if (entity.Health < entity.MaxHealth / 2)
                     if (entity.Health < entity.MaxHealth / 4)
@@ -35,7 +35,7 @@ namespace Evolutionary.Experiments.Experiment1
                     return Healthy;
             }
 
-            return _base.MapField(field);
+            return _base.MapCell(cell);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
 using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
@@ -21,12 +21,12 @@ namespace Evolutionary.Core.Turns
         
         public virtual void ProcessRound(Round round)
         {
-            for (int x = 0; x < round.Map.Size.X; x++)
+            for (int x = 0; x < round.Field.Size.X; x++)
             {
-                for (int y = 0; y < round.Map.Size.Y; y++)
+                for (int y = 0; y < round.Field.Size.Y; y++)
                 {
-                    var item = round.Map[x, y];
-                    if (item.Entity is ITurnable turnable)
+                    var cell = round.Field[(x, y)];
+                    if (cell.Entity is ITurnable turnable)
                     {
                         turnable.TakeTurn(round, new Position(x, y));
                     }

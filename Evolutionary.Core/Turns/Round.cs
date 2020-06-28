@@ -1,4 +1,5 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
+using Evolutionary.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace Evolutionary.Core.Turns
 {
     public class Round
     {
-        public Round(Map map)
+        public Round(Field field)
         {
-            Map = map;
+            ThrowHelper.Check_ArgumentNull(field, nameof(field));
+            Field = field;
         }
 
-        public Map Map { get; }
+        public Field Field { get; }
     }
 }

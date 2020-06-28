@@ -1,4 +1,4 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Fielding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
