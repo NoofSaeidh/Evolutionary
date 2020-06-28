@@ -1,4 +1,5 @@
-﻿using Evolutionary.Core.Mapping;
+﻿using Evolutionary.Core.Global;
+using Evolutionary.Core.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,9 +12,15 @@ namespace Evolutionary.Core.Helpers
 {
     internal static class ThrowHelper
     {
+        [Conditional("DEBUG")]
+        public static void Check_ArgumentNull(object? obj, string paramName)
+        {
+            if (obj is null)
+                throw new ArgumentNullException(paramName);
+        }
 
         [Conditional("DEBUG")]
-        public static void Check_ArgumentOutOfRange(MapIndex index, MapIndex maxValue, string paramName)
+        public static void Check_ArgumentOutOfRange(Index2d index, Index2d maxValue, string paramName)
         {
             Check_ArgumentOutOfRange(index.X, maxValue.X, paramName);
             Check_ArgumentOutOfRange(index.Y, maxValue.Y, paramName);

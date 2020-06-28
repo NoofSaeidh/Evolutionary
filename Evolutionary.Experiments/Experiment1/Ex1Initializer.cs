@@ -12,7 +12,7 @@ namespace Evolutionary.Experiments.Experiment1
 {
     public class Ex1Initializer : IInitializer
     {
-        private Map CreateMap(MapIndex size, int creatureCount, int speed, int vision, int maxHealth)
+        private Map CreateMap(Position size, int creatureCount, int speed, int vision, int maxHealth)
         {
             var map = new Map(size);
             var rand = new Random();

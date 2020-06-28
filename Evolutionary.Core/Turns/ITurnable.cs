@@ -9,6 +9,6 @@ namespace Evolutionary.Core.Turns
 {
     public interface ITurnable
     {
-        void TakeTurn(Round round, MapIndex currentPosition);
+        void TakeTurn(Round round, Position currentPosition);
     }
 }

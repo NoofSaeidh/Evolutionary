@@ -28,7 +28,7 @@ namespace Evolutionary.Core.Turns
                     var item = round.Map[x, y];
                     if (item.Entity is ITurnable turnable)
                     {
-                        turnable.TakeTurn(round, new Mapping.MapIndex(x, y));
+                        turnable.TakeTurn(round, new Position(x, y));
                     }
                 }
             }

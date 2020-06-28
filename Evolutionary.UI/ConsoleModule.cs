@@ -20,7 +20,9 @@ namespace Evolutionary.UI
 
             builder.RegisterType<ConsoleRenderer>()
                    .As<IRenderer>()
-                   .SingleInstance();
+                   .As<IStartable>()
+                   .SingleInstance()
+                   .AutoActivate();
 
             builder.RegisterType<ConsoleFieldMapper>()
                    .As<IFieldMapper>()

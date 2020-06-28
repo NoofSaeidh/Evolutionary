@@ -28,7 +28,7 @@ namespace Evolutionary.Experiments.Experiment1
         public int MaxHealth { get; }
         public int Health { get; private set; }
 
-        public override void TakeTurn(Round round, MapIndex currentPosition)
+        public override void TakeTurn(Round round, Position currentPosition)
         {
             var (xMin, xMax, yMin, yMax) = GetMaxBorders(currentPosition, round.Map.Size, Vision);
             for (int x = xMin; x < xMax; x++)
@@ -92,7 +92,7 @@ namespace Evolutionary.Experiments.Experiment1
 
         }
 
-        private (int xMin, int xMax, int yMin, int yMax) GetMaxBorders(MapIndex original, MapIndex size, int modifier)
+        private (int xMin, int xMax, int yMin, int yMax) GetMaxBorders(Position original, Position size, int modifier)
         {
             var xMin = GetCheckedIndex(original.X - modifier, size.X);
             var xMax = GetCheckedIndex(original.X + modifier, size.X);
@@ -101,9 +101,9 @@ namespace Evolutionary.Experiments.Experiment1
             return (xMin, xMax, yMin, yMax);
         }
 
-        private MapIndex GetIndex(int x, int y, int maxX, int maxY)
+        private Position GetIndex(int x, int y, int maxX, int maxY)
         {
-            return new MapIndex(GetCheckedIndex(x, maxX), GetCheckedIndex(y, maxY));
+            return new Position(GetCheckedIndex(x, maxX), GetCheckedIndex(y, maxY));
         }
         private int GetCheckedIndex(int i, int maxI)
         {

@@ -1,4 +1,5 @@
-﻿using Evolutionary.Core.Turns;
+﻿using Autofac;
+using Evolutionary.Core.Turns;
 using Evolutionary.Core.UI;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,19 @@ using Console = Colorful.Console;
 
 namespace Evolutionary.UI
 {
-    public class ConsoleRenderer : IRenderer
+    public class ConsoleRenderer : IRenderer, IStartable
     {
         private readonly IFieldMapper _fieldMapper;
 
         public ConsoleRenderer(IFieldMapper fieldMapper)
         {
             _fieldMapper = fieldMapper;
+        }
+
+        public void Start()
+        {
+            Console.Clear();
+            ConsoleWindowsWrapper.FullScreenConsole();
         }
 
         public Task RenderRound(Round round)
@@ -39,5 +46,6 @@ namespace Evolutionary.UI
 
             return Task.CompletedTask;
         }
+
     }
 }

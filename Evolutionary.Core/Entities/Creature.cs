@@ -67,7 +67,7 @@ namespace Evolutionary.Core.Entities
             return sb.ToString();
         }
 
-        public virtual void TakeTurn(Round round, MapIndex currentPosition)
+        public virtual void TakeTurn(Round round, Position currentPosition)
         {
         }
     }

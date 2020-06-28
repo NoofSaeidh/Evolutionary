@@ -20,13 +20,18 @@ namespace Evolutionary.Host
             base.Load(builder);
 
             builder.RegisterType<Application>()
-                   .AsSelf();
+                   .AsSelf()
+                   .SingleInstance();
 
             builder.RegisterType<DefaultRoundProcessor>()
-                   .As<IRoundProcessor>();
+                   .As<IRoundProcessor>()
+                   .SingleInstance();
+
 
             builder.RegisterType<DefaultGenerationProcessor>()
-                   .As<IGenerationProcessor>();
+                   .As<IGenerationProcessor>()
+                   .SingleInstance();
+
         }
     }
 }
