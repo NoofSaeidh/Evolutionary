@@ -51,10 +51,21 @@ namespace Evolutionary.Core.Global
             return new Index2d(left.X + right.X, left.Y + right.Y);
         }
 
+        public static Index2d Add(Index2d left, int both)
+        {
+            return new Index2d(left.X + both, left.Y + both);
+        }
+
         public static Index2d Subtract(Index2d left, Index2d right)
         {
             return new Index2d(left.X - right.X, left.Y - right.Y);
         }
+
+        public static Index2d Subtract(Index2d left, int both)
+        {
+            return new Index2d(left.X - both, left.Y - both);
+        }
+
         public static Index2d FromValueTuple((int x, int y) index) => new Index2d(index.x, index.y);
 
         public static bool operator ==(Index2d left, Index2d right) => left.Equals(right);
@@ -62,7 +73,11 @@ namespace Evolutionary.Core.Global
 
         public static Index2d operator +(Index2d left, Index2d right) => Add(left, right);
 
+        public static Index2d operator +(Index2d left, int both) => Add(left, both);
+
         public static Index2d operator -(Index2d left, Index2d right) => Subtract(left, right);
+
+        public static Index2d operator -(Index2d left, int both) => Subtract(left, both);
 
         public static implicit operator Index2d((int x, int y) index) => FromValueTuple(index);
     }

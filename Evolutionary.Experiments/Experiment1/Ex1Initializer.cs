@@ -1,6 +1,7 @@
-﻿using Evolutionary.Core.Generations;
+﻿using Evolutionary.Core.Fielding;
+using Evolutionary.Core.Generations;
+using Evolutionary.Core.Global;
 using Evolutionary.Core.Initialization;
-using Evolutionary.Core.Mapping;
 using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
@@ -12,28 +13,26 @@ namespace Evolutionary.Experiments.Experiment1
 {
     public class Ex1Initializer : IInitializer
     {
-        private Map CreateMap(Position size, int creatureCount, int speed, int vision, int maxHealth)
+        private Field CreateField(Index2d size, int creatureCount, int speed, int vision, int maxHealth)
         {
-            var map = new Map(size);
+            var field = new Field(size);
             var rand = new Random();
             for (int i = 0; i < creatureCount; i++)
             {
-                while(true)
+                var creature = new Ex1Creature(speed, vision, maxHealth);
+                int x, y;
+                do
                 {
-                    var x = rand.Next(0, size.X);
-                    var y = rand.Next(0, size.Y);
-                    if(map[x,y].IsEmpty)
-                    {
-                        map[x, y] = new Field(new Ex1Creature(10, 10, 100));
-                        break;
-                    }
+                    x = rand.Next(0, size.X);
+                    y = rand.Next(0, size.Y);
                 }
+                while (!field.AddEntity(creature, (x, x + creature.Size, y, y + creature.Size)));
             }
-            return map;
+            return field;
         }
 
         public Generation InitialGeneration => new Generation(0, 32,
-            CreateMap(
+            CreateField(
                 size: (32, 32),
                 creatureCount: 16,
                 speed: 4,

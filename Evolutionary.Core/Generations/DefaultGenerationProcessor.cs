@@ -21,12 +21,12 @@ namespace Evolutionary.Core.Generations
         {
             for (int i = 0; i < generation.RoundsCount; i++)
             {
-                _roundProcessor.ProcessRound(new Round(generation.Map));
+                _roundProcessor.ProcessRound(new Round(generation.Field));
                 // todo: servic for await
                 Thread.Sleep(2000);
             }
 
-            return new Generation(generation.GenerationId + 1, generation.RoundsCount, generation.Map);
+            return new Generation(generation.GenerationId + 1, generation.RoundsCount, generation.Field);
         }
     }
 }

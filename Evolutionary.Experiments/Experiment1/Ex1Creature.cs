@@ -1,10 +1,12 @@
 ﻿using Evolutionary.Core.Characteristics;
 using Evolutionary.Core.Entities;
-using Evolutionary.Core.Mapping;
+using Evolutionary.Core.Fielding;
+using Evolutionary.Core.Global;
 using Evolutionary.Core.Mutations;
 using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -27,16 +29,17 @@ namespace Evolutionary.Experiments.Experiment1
         public int Vision { get; }
         public int MaxHealth { get; }
         public int Health { get; private set; }
+        public int Size { get; } = 2;
 
         public override void TakeTurn(Round round, Position currentPosition)
         {
-            var (xMin, xMax, yMin, yMax) = GetMaxBorders(currentPosition, round.Map.Size, Vision);
+            var (xMin, xMax, yMin, yMax) = GetMaxPosition(currentPosition, round.Field.Size, Vision);
             for (int x = xMin; x < xMax; x++)
             {
                 for (int y = yMin; y < yMax; y++)
                 {
-                    var item = round.Map[x, y];
-                    if (item.Entity is Ex1Creature creature)
+                    var item = round.Field[(x, y)];
+                    if (item.Entity is Ex1Creature creature && creature != this)
                     {
                         var diff = creature.Health - Health;
                         if (diff > MaxHealth / 2)
@@ -54,56 +57,33 @@ namespace Evolutionary.Experiments.Experiment1
             // death
             if (Health <= 0)
             {
-                round.Map[currentPosition] = default;
+                round.Field.RemoveEntity(this);
                 return;
             }
 
-            (xMin, xMax, yMin, yMax) = GetMaxBorders(currentPosition, round.Map.Size, Speed);
-            var newX = _rand.Next(xMin, xMax);
-            var xDiff = newX - currentPosition.X;
-            var newY = _rand.Next(yMin, yMax);
-            var yDiff = newY - currentPosition.Y;
-            while(true)
+            (xMin, xMax, yMin, yMax) = GetMaxPosition(currentPosition, round.Field.Size, Speed);
+            var (xMinMax, yMinMax) = GetCheckedIndex((xMin + Size - 1, yMin + Size - 1), round.Field.Size);
+            var newX = _rand.Next(xMin, xMinMax);
+            var newY = _rand.Next(yMin, yMinMax);
+            if(!round.Field.MoveEntity(this, new Position(newX, newX + Size - 1, newY, newY + Size - 1)))
             {
-                if(round.Map[newX, newY].IsEmpty)
-                {
-                    round.Map[newX, newY] = new Field(this);
-                    round.Map[currentPosition] = default;
-                    break;
-                }
-                else
-                {
-                    if(xDiff == 0 && yDiff == 0)
-                    {
-                        break;
-                    }
-                    if(xDiff != 0)
-                    {
-                        xDiff = xDiff > 0 ? xDiff - 1 : xDiff + 1;
-                        newX = currentPosition.X + xDiff;
-                    }
-                    if(yDiff != 0)
-                    {
-                        yDiff = yDiff > 0 ? yDiff - 1 : yDiff + 1;
-                        newY = currentPosition.Y + yDiff;
-                    }
-                }
+                throw new InvalidOperationException();
             }
 
         }
 
-        private (int xMin, int xMax, int yMin, int yMax) GetMaxBorders(Position original, Position size, int modifier)
+        private Position GetMaxPosition(Position original, Index2d size, int modifier)
         {
-            var xMin = GetCheckedIndex(original.X - modifier, size.X);
-            var xMax = GetCheckedIndex(original.X + modifier, size.X);
-            var yMin = GetCheckedIndex(original.Y - modifier, size.Y);
-            var yMax = GetCheckedIndex(original.Y + modifier, size.Y);
+            var xMin = GetCheckedIndex(original.Start.X - modifier, size.X);
+            var xMax = GetCheckedIndex(original.End.X + modifier, size.X);
+            var yMin = GetCheckedIndex(original.Start.Y - modifier, size.Y);
+            var yMax = GetCheckedIndex(original.End.Y + modifier, size.Y);
             return (xMin, xMax, yMin, yMax);
         }
 
-        private Position GetIndex(int x, int y, int maxX, int maxY)
+        private Index2d GetCheckedIndex(Index2d index, Index2d maxIndex)
         {
-            return new Position(GetCheckedIndex(x, maxX), GetCheckedIndex(y, maxY));
+            return new Index2d(GetCheckedIndex(index.X, maxIndex.X), GetCheckedIndex(index.Y, maxIndex.Y));
         }
         private int GetCheckedIndex(int i, int maxI)
         {
@@ -127,8 +107,8 @@ namespace Evolutionary.Experiments.Experiment1
         protected override Ex1Creature CreateSelfFromCharacteristics(CharacteristicsList chars)
         {
             return new Ex1Creature(chars[Ex1Characteristics.Speed],
-                                 chars[Ex1Characteristics.Vision],
-                                 chars[Ex1Characteristics.MaxHealth]);
+                                   chars[Ex1Characteristics.Vision],
+                                   chars[Ex1Characteristics.MaxHealth]);
         }
     }
 }

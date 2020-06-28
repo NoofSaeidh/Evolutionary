@@ -112,6 +112,22 @@ namespace Evolutionary.Core.Fielding
             return true;
         }
 
+        public bool RemoveEntity(Entity entity)
+        {
+            ThrowHelper.Check_ArgumentNull(entity, nameof(entity));
+
+            bool removed = false;
+            foreach (var (index, cell) in this)
+            {
+                if (cell.Entity == entity)
+                {
+                    this[index] = default;
+                    removed = true;
+                }
+            }
+            return removed;
+        }
+
         public Index2d Size { get; }
 
 

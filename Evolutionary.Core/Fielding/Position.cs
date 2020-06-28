@@ -3,6 +3,7 @@ using Evolutionary.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Evolutionary.Core.Fielding
 
         public Position(Index2d start, Index2d end)
         {
-            ThrowHelper.Check_ArgumentOutOfRange(start, end, nameof(start));
+            ThrowHelper.Check_ArgumentOutOfRange(start, end + 1, nameof(start));
             Start = start;
             End = end;
         }
@@ -111,9 +112,9 @@ namespace Evolutionary.Core.Fielding
             }
             else
             {
-                for (int x = Start.X; x < End.X; x++)
+                for (int x = Start.X; x <= End.X; x++)
                 {
-                    for (int y = Start.Y; y < End.Y; y++)
+                    for (int y = Start.Y; y <= End.Y; y++)
                     {
                         yield return new Index2d(x, y);
                     }
