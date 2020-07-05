@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Fielding
 {
+    [DebuggerDisplay("{ToString(),nq}")]
     public struct Position : IEquatable<Position>
     {
         public Position(int x, int y) : this(new Index2d(x, y))
@@ -83,6 +84,14 @@ namespace Evolutionary.Core.Fielding
         {
             return Start == other.Start
                 && End == other.End;
+        }
+
+        public bool Intersect(Position other)
+        {
+            // TODO: OPTIMIZE!!!
+            var indexes = GetIndexes().ToList();
+            var otherIndexes = GetIndexes().ToList();
+            return otherIndexes.Any(oi => indexes.Contains(oi));
         }
 
         public override bool Equals(object? obj)

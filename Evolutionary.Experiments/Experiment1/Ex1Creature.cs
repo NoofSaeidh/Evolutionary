@@ -6,6 +6,7 @@ using Evolutionary.Core.Mutations;
 using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -33,25 +34,25 @@ namespace Evolutionary.Experiments.Experiment1
 
         public override void TakeTurn(Round round, Position currentPosition)
         {
-            var (xMin, xMax, yMin, yMax) = GetMaxPosition(currentPosition, round.Field.Size, Vision);
-            for (int x = xMin; x < xMax; x++)
+            var maxPosition = GetMaxPosition(currentPosition, round.Field.Size, Vision);
+            foreach (var (entity, entityPosition) in round.Field.GetEntities())
             {
-                for (int y = yMin; y < yMax; y++)
+                if (entity == this)
+                    continue;
+                if (entity is Ex1Creature creature && maxPosition.Intersect(entityPosition))
                 {
-                    var item = round.Field[(x, y)];
-                    if (item.Entity is Ex1Creature creature && creature != this)
+                    var diff = Health - creature.Health;
+                    if (diff > MaxHealth / 2)
                     {
-                        var diff = creature.Health - Health;
-                        if (diff > MaxHealth / 2)
-                            Health /= 4;
-                        else if (diff > MaxHealth / 4)
-                            Health -= 10;
-                        else if (diff < 0)
-                            Health += 10;
-                        else
-                            Health -= 4;
+                        creature.Health /= 4;
+                        Health += 20;
                     }
+                    else if (diff > MaxHealth / 4)
+                        creature.Health -= 10;
+                    else
+                        creature.Health -= 4;
                 }
+
             }
 
             // death
@@ -61,15 +62,46 @@ namespace Evolutionary.Experiments.Experiment1
                 return;
             }
 
-            (xMin, xMax, yMin, yMax) = GetMaxPosition(currentPosition, round.Field.Size, Speed);
-            var (xMinMax, yMinMax) = GetCheckedIndex((xMin + Size - 1, yMin + Size - 1), round.Field.Size);
-            var newX = _rand.Next(xMin, xMinMax);
-            var newY = _rand.Next(yMin, yMinMax);
-            if(!round.Field.MoveEntity(this, new Position(newX, newX + Size - 1, newY, newY + Size - 1)))
+            bool moved = false;
+            foreach (var pp in GetPossiblePositions(round.Field.Size, currentPosition))
             {
+                if (round.Field.MoveEntity(this, pp))
+                {
+                    moved = true;
+                    break;
+                }
+            }
+
+            if (!moved)
+            {
+                // todo: some acton?
                 throw new InvalidOperationException();
             }
 
+        }
+
+        private IEnumerable<Position> GetPossiblePositions(Index2d fieldSize, Position currentPosition)
+        {
+            var maxStartPosition = GetMaxPosition(
+                new Position(
+                    currentPosition.Start.X,
+                    currentPosition.End.X - Size + 1,
+                    currentPosition.Start.Y,
+                    currentPosition.End.Y - Size + 1),
+                fieldSize,
+                Speed);
+            var indexes = maxStartPosition.GetIndexes().ToList();
+            return RandomSort(indexes)
+                .Select(i => new Position(i, new Index2d(i.X + Size - 1, i.Y + Size - 1)));
+        }
+
+        //todo: optimize
+        private IEnumerable<T> RandomSort<T>(IEnumerable<T> items)
+        {
+            return items
+                .Select(i => (seed: _rand.Next(), i))
+                .OrderBy(i => i.seed)
+                .Select(i => i.i);
         }
 
         private Position GetMaxPosition(Position original, Index2d size, int modifier)
@@ -101,6 +133,8 @@ namespace Evolutionary.Experiments.Experiment1
                 new CharacteristicValue(Speed, Ex1Characteristics.Speed),
                 new CharacteristicValue(Vision, Ex1Characteristics.Vision),
                 new CharacteristicValue(MaxHealth, Ex1Characteristics.MaxHealth),
+                new CharacteristicValue(Size, Ex1Characteristics.Size),
+                new CharacteristicValue(Health, Ex1Characteristics.Health),
             });
         }
 

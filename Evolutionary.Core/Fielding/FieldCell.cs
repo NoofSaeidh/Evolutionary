@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Fielding
 {
+    [DebuggerDisplay("{ToString(),nq}")]
     public struct FieldCell
     {
         public FieldCell(Position? entityPosition, Entity? entity)
@@ -20,7 +21,7 @@ namespace Evolutionary.Core.Fielding
 
         public Position? EntityPosition { get; }
         public Entity? Entity { get; }
-        public bool IsEmpty => Entity != null;
+        public bool IsEmpty => Entity is null;
 
         public override string ToString()
         {

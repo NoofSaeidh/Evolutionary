@@ -5,12 +5,14 @@ using Evolutionary.Core.Reproduction;
 using Evolutionary.Core.Turns;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Entities
 {
+    [DebuggerDisplay("{ToDebuggerString(),nq}")]
     public abstract class Creature : Entity, IMutable, IReproducable, ITurnable
     {
         public abstract string Description { get; }
@@ -65,6 +67,12 @@ namespace Evolutionary.Core.Entities
                 sb.Append(", " + ch.ToString());
             }
             return sb.ToString();
+        }
+
+        // for some reason ToString with string builder cannot be properly launched in debug
+        protected virtual string? ToDebuggerString()
+        {
+            return string.Join(", ", GetCharacteristics());
         }
 
         public virtual void TakeTurn(Round round, Position currentPosition)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Evolutionary.Core.Characteristics
 {
-    public class CharacteristicsList : IReadOnlyList<CharacteristicValue>, ICollection
+    public struct CharacteristicsList : IReadOnlyList<CharacteristicValue>, ICollection
     {
         private readonly CharacteristicValue[] _values;
 

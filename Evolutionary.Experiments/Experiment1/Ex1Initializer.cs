@@ -26,7 +26,7 @@ namespace Evolutionary.Experiments.Experiment1
                     x = rand.Next(0, size.X);
                     y = rand.Next(0, size.Y);
                 }
-                while (!field.AddEntity(creature, (x, x + creature.Size, y, y + creature.Size)));
+                while (!field.AddEntity(creature, (x, x + creature.Size - 1, y, y + creature.Size - 1)));
             }
             return field;
         }

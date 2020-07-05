@@ -12,5 +12,7 @@ namespace Evolutionary.Experiments.Experiment1
         public static readonly Characteristic Speed = new Characteristic(nameof(Speed), mutable: true);
         public static readonly Characteristic Vision = new Characteristic(nameof(Vision), mutable: true);
         public static readonly Characteristic MaxHealth = new Characteristic(nameof(MaxHealth), mutable: true);
+        public static readonly Characteristic Size = new Characteristic(nameof(Size), mutable: false);
+        public static readonly Characteristic Health = new Characteristic(nameof(Health), mutable: false);
     }
 }

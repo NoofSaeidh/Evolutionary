@@ -21,16 +21,10 @@ namespace Evolutionary.Core.Turns
         
         public virtual void ProcessRound(Round round)
         {
-            for (int x = 0; x < round.Field.Size.X; x++)
+            foreach (var (entity, position) in round.Field.GetEntities())
             {
-                for (int y = 0; y < round.Field.Size.Y; y++)
-                {
-                    var cell = round.Field[(x, y)];
-                    if (cell.Entity is ITurnable turnable)
-                    {
-                        turnable.TakeTurn(round, new Position(x, y));
-                    }
-                }
+                if (entity is ITurnable turnable)
+                    turnable.TakeTurn(round, position);
             }
 
             Renderer.RenderRound(round);

@@ -46,6 +46,22 @@ namespace Evolutionary.Core.Fielding
             return null;
         }
 
+        public IEnumerable<(Entity, Position)> GetEntities()
+        {
+            var entities = new List<Entity>();
+            foreach (var item in _items)
+            {
+                if (item.Entity is Entity)
+                {
+                    if (!entities.Contains(item.Entity))
+                    {
+                        yield return (item.Entity, item.EntityPosition.Value);
+                        entities.Add(item.Entity);
+                    }
+                }
+            }
+        }
+
         public bool AddEntity(Entity entity, Position position)
         {
             ThrowHelper.Check_ArgumentNull(entity, nameof(entity));
