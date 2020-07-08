@@ -14,7 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolutionary.Host", "Evolut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolutionary.UI", "Evolutionary.UI\Evolutionary.UI.csproj", "{E75C47DA-5DE7-4B39-A0F9-89D23313CCB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolutionary.Experiments", "Evolutionary.Experiments\Evolutionary.Experiments.csproj", "{03F7E27F-7B3A-4F0D-810D-29BF7BF4465B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolutionary.Experiments", "Evolutionary.Experiments\Evolutionary.Experiments.csproj", "{03F7E27F-7B3A-4F0D-810D-29BF7BF4465B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{26E94391-6068-45C0-8450-F8FF3AEAFFED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolutionary.Core.Tests", "Evolutionary.Core.Tests\Evolutionary.Core.Tests.csproj", "{113F5DC0-6BDA-4CCB-87F9-54F163808200}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +42,16 @@ Global
 		{03F7E27F-7B3A-4F0D-810D-29BF7BF4465B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F7E27F-7B3A-4F0D-810D-29BF7BF4465B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F7E27F-7B3A-4F0D-810D-29BF7BF4465B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{113F5DC0-6BDA-4CCB-87F9-54F163808200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{113F5DC0-6BDA-4CCB-87F9-54F163808200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{113F5DC0-6BDA-4CCB-87F9-54F163808200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{113F5DC0-6BDA-4CCB-87F9-54F163808200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{113F5DC0-6BDA-4CCB-87F9-54F163808200} = {26E94391-6068-45C0-8450-F8FF3AEAFFED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DC3E247-84C7-4ED9-961F-0B7FAA375D15}

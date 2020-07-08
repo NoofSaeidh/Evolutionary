@@ -18,7 +18,7 @@ namespace Evolutionary.Core.Fielding
         {
         }
 
-        public Position(int xStart, int xEnd, int yStart, int yEnd) : this(new Index2d(xStart, yStart), new Index2d(xEnd, yEnd))
+        public Position(int xStart, int yStart, int xEnd, int yEnd) : this(new Index2d(xStart, yStart), new Index2d(xEnd, yEnd))
         {
         }
 
@@ -141,7 +141,7 @@ namespace Evolutionary.Core.Fielding
             return new Position(left.Start - right.Start, left.End - right.End);
         }
         public static Position FromValueTuple((Index2d start, Index2d end) position) => new Position(position.start, position.end);
-        public static Position FromValueTuple((int xStart, int xEnd, int yStart, int yEnd) position) => new Position(position.xStart, position.xEnd, position.yStart, position.yEnd);
+        public static Position FromValueTuple((int xStart, int yStart, int xEnd, int yEnd) position) => new Position(position.xStart, position.yStart, position.xEnd, position.yEnd);
 
         public static bool operator ==(Position left, Position right) => left.Equals(right);
         public static bool operator !=(Position left, Position right) => !left.Equals(right);
@@ -151,7 +151,7 @@ namespace Evolutionary.Core.Fielding
         public static Position operator -(Position left, Position right) => Subtract(left, right);
 
         public static implicit operator Position((Index2d start, Index2d end) position) => FromValueTuple(position);
-        public static implicit operator Position((int xStart, int xEnd, int yStart, int yEnd) position) => FromValueTuple(position);
+        public static implicit operator Position((int xStart, int yStart, int xEnd, int yEnd) position) => FromValueTuple(position);
     }
 }
 

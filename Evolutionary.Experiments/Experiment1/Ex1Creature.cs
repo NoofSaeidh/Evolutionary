@@ -65,6 +65,8 @@ namespace Evolutionary.Experiments.Experiment1
             bool moved = false;
             foreach (var pp in GetPossiblePositions(round.Field.Size, currentPosition))
             {
+                if (pp == currentPosition)
+                    continue;
                 if (round.Field.MoveEntity(this, pp))
                 {
                     moved = true;
@@ -85,8 +87,8 @@ namespace Evolutionary.Experiments.Experiment1
             var maxStartPosition = GetMaxPosition(
                 new Position(
                     currentPosition.Start.X,
-                    currentPosition.End.X - Size + 1,
                     currentPosition.Start.Y,
+                    currentPosition.End.X - Size + 1,
                     currentPosition.End.Y - Size + 1),
                 fieldSize,
                 Speed);

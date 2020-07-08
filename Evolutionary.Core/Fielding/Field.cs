@@ -46,7 +46,7 @@ namespace Evolutionary.Core.Fielding
             return null;
         }
 
-        public IEnumerable<(Entity, Position)> GetEntities()
+        public IEnumerable<(Entity Entity, Position Position)> GetEntities()
         {
             var entities = new List<Entity>();
             foreach (var item in _items)
