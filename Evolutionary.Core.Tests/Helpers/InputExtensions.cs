@@ -13,16 +13,22 @@ namespace Evolutionary.Core.Tests.Helpers
         {
             foreach (var indexes in items)
             {
-                if (indexes.Length == 2)
-                { 
-                    yield return new Position(indexes[0], indexes[1]);
-                }
-                else if (indexes.Length == 4)
-                {
-                    yield return new Position(indexes[0], indexes[1], indexes[2], indexes[3]);
-                }
-                else throw new TestDataException();
+                yield return indexes.ToPosition();
             }
+        }
+
+        public static Position ToPosition(this int[] item)
+        {
+            if (item.Length == 2)
+            {
+                return new Position(item[0], item[1]);
+            }
+            else if (item.Length == 4)
+            {
+                return new Position(item[0], item[1], item[2], item[3]);
+            }
+            else throw new TestDataException();
+
         }
     }
 }

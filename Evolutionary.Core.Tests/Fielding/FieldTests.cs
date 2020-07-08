@@ -55,5 +55,40 @@ namespace Evolutionary.Core.Tests.Fielding
             assert.Should().HaveCount(entities.Count)
                 .And.BeEquivalentTo(entities);
         }
+
+        [Theory]
+        [InlineData(new[] { 1, 1, 2, 3 })]
+        [InlineData(new[] { 4, 4 })]
+        [InlineData(new[] { 0, 0, 19, 19 })]
+        public void AddEntity_Should_Place_Entity_On_Right_Cells(int[] positionAr)
+        {
+            var field = new Field((20, 20));
+            var position = positionAr.ToPosition();
+            var entity = new TestEntity();
+            if (!field.AddEntity(entity, position))
+                throw new TestExecutionException();
+
+            field.GetEntities()
+                 .Should()
+                 .HaveCount(1)
+                 .And.SatisfyRespectively((t) => t.Position.Should().Be(position));
+            var indexes = position.GetIndexes();
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    if (indexes.Contains((x, y)))
+                    {
+                        field[(x, y)].Entity.Should().Be(entity);
+                        field[(x, y)].EntityPosition.Should().Be(position);
+                    }
+                    else
+                    {
+                        field[(x, y)].Entity.Should().BeNull();
+                    }
+                }
+            }
+        }
+
     }
 }
