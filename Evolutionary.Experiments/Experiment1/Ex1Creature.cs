@@ -112,7 +112,7 @@ namespace Evolutionary.Experiments.Experiment1
             var xMax = GetCheckedIndex(original.End.X + modifier, size.X);
             var yMin = GetCheckedIndex(original.Start.Y - modifier, size.Y);
             var yMax = GetCheckedIndex(original.End.Y + modifier, size.Y);
-            return (xMin, xMax, yMin, yMax);
+            return (xMin, yMin, xMax, yMax);
         }
 
         private Index2d GetCheckedIndex(Index2d index, Index2d maxIndex)
